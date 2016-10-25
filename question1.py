@@ -22,11 +22,15 @@ def combinations(n, m):
         result.append(combination)
     return result
 
-if __name__ == '__main__':
+
+def main():
+    """Entrypoint"""
     for _ in range(read_inputs('请输入正整数T (T <= 10): ', IntValidator(1, 11))):
         print(combinations(*read_inputs(
             '请输入2个正整数N, M (1 <= M <= N <= 30): ',
             IntValidator(1, 31), IntValidator(1, 31),
             validate=(lambda values: values[0] > values[1], 'N必须大于M')
         )))
-    print('结束')
+    read_inputs('请按回车键退出', None)
+if __name__ == '__main__':
+    main()

@@ -8,6 +8,7 @@
 
 
 from functools import wraps
+
 from util import read_inputs, NumValidator
 
 
@@ -31,6 +32,11 @@ def succ(n):
     if n >= 101:
         return n - 10
 
-if __name__ == '__main__':
+
+def main():
+    """Entrypoint"""
     print(succ(read_inputs('请给出n：', NumValidator())))
     print('调用次数：' + str(counter.count))
+    read_inputs('请按回车键退出', None)
+if __name__ == '__main__':
+    main()

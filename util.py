@@ -10,7 +10,8 @@ def read_inputs(message='请输入数据：', *validators, **options):
     """读取输入"""
     while True:
         values = input(message).split(
-            options['separate'] if 'separate' in options else ',')
+            options['separate'] if 'separate' in options else ','
+        )
         index = 0
         value_num = len(values)
         for validator in validators:
@@ -82,11 +83,11 @@ class NumValidator(Validator):
         parent.__init__(
             min_value is not None and (
                 lambda value: value >= min_value,
-                '未达到下限' + str(min_value)
+                '数值未达到下限' + str(min_value)
             ),
             max_value is not None and (
                 lambda value: value < max_value,
-                '已达到上限' + str(max_value)
+                '数值已达到上限' + str(max_value)
             )
         )
         self.types = types or (int, float)
@@ -109,12 +110,16 @@ class FloatValidator(NumValidator):
 class StrValidator(Validator):
     """字符串校验器"""
 
-    def __init__(self, str_len=None):
+    def __init__(self, min_len=1, max_len=None):
         parent = super(StrValidator, self)
         parent.__init__(
-            str_len is not None and (
-                lambda value: len(value) <= str_len,
-                '长度超出上限' + str(str_len)
+            min_len is not None and (
+                lambda value: len(value) >= min_len,
+                '字符串长度低于下限%d' % min_len
+            ),
+            max_len is not None and (
+                lambda value: len(value) <= max_len,
+                '字符串长度超出上限%d' % max_len
             )
         )
 
