@@ -38,7 +38,7 @@ def read_inputs(message='请输入数据：', *validators, **options):
         if index != value_num:
             print('输入参数过多')
             continue
-        if 'validate' in options and not options['validate'][0](values):
+        if 'validate' in options and options['validate'][0](values) != True:
             print(options['validate'][1])
             continue
         if index == 1:
